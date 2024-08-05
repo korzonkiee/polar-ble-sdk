@@ -618,6 +618,7 @@ class BDBleApiImpl private constructor(context: Context, features: Set<PolarBleS
                     .groupBy { entry -> entry.date }
                     .flatMap { groupedEntries ->
                         groupedEntries
+                            .onBackpressureBuffer()
                             .toList()
                             .flatMapPublisher { entriesList ->
                                 var totalSize = 0
